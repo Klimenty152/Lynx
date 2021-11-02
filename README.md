@@ -31,12 +31,14 @@ def input_coordinates(player_mumber):
         if len(input_value) == 0:
             print('Введите координаты еще раз!')
             continue
-
-        if input_value[0] == '401':
+        elif len(input_value) == 1 and input_value[0] == '401':
             message_cod   = 401
             message_value = [x1,x2]
             message_text = 'Выход из игры!'
             break
+        elif len(input_value) == 1 and input_value[0] != '401':
+            print('Введена одна координата. Повторите ввод координат!')
+            continue
 
         # -------------------------------------------------------
         # проверка на корректный ввод координат
