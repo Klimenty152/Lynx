@@ -12,7 +12,7 @@ print('<< Игра крестики-нолики >>\n'
 print()
 
 def input_coordinates(player_mumber):
-    global play_matrix
+    global game_matrix
     global matrix_size
 
     message_cod   = 0
@@ -22,6 +22,7 @@ def input_coordinates(player_mumber):
 
     # input_value = ' 1 , 0 '
     while True:
+        message_cod = 0
         input_value = input("Ход игрока " + str(player_mumber) + '\n координаты: ')
         input_value = input_value.strip().split()
         # input_value = input_value.replace(' ', '')
@@ -49,7 +50,7 @@ def input_coordinates(player_mumber):
             message_cod = 403
             message_text = message_text + 'значения координат находятся за пределами размерности матрицы \n'
 
-        elif play_matrix[x1][x2] == 1 or play_matrix[x1][x2] == 2:
+        elif game_matrix[x1][x2] == 1 or game_matrix[x1][x2] == 2:
             message_cod = 404
             message_text = message_text + 'значение по данным координатам уже установлено \n'
 
@@ -69,10 +70,10 @@ def input_coordinates(player_mumber):
 
     return result
 
-def show_matrix(play_matrix):
+def show_matrix(game_matrix):
     play_matrix_str = ''
 
-    for row_i in play_matrix:
+    for row_i in game_matrix:
         str_row = ''
         for col_j in row_i:
             if col_j == 1:   vl = 'X'
@@ -86,8 +87,8 @@ def show_matrix(play_matrix):
     return play_matrix_str
 
 def set_coordinates(x1,x2,set_value='-'):
-    global play_matrix
-    play_matrix[x1][x2] = set_value
+    global game_matrix
+    game_matrix[x1][x2] = set_value
 
 def get_game_result(n,play_matrix):
     result = 0
@@ -139,9 +140,9 @@ stop_game     = False
 # создаем матрицу
 # play_matrix = [['-','-','-'],['-','-','-'],['-','-','-']]
 
-play_matrix = [['-']*(matrix_size+1) for i in range(matrix_size+1)]
+game_matrix = [['-']*(matrix_size+1) for i in range(matrix_size+1)]
 
-print(show_matrix(play_matrix))
+print(show_matrix(game_matrix))
 
 # -----------------------------------------------------------------------
 #                           начинаем игру
@@ -168,12 +169,12 @@ while сontinue_play:
     # 3. устанавка значения по координатам
 
     set_coordinates(x1, x2, player_mumber)
-    print(show_matrix(play_matrix))
+    print(show_matrix(game_matrix))
 
     # -------------------------------------------------------
     # 4. проверяем на выигрыш
 
-    game_result = get_game_result(matrix_size, play_matrix)
+    game_result = get_game_result(matrix_size, game_matrix)
 
     if game_result != 0:
         stop_game = True
